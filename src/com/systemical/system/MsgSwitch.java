@@ -1,6 +1,11 @@
 /**
  * MsgSwitch - Inter-thread Message Switch
  * 
+ * Usage:
+ * 	- main thread creates MsgSwitch
+ *  - main thread creates Agents
+ *  - main thread registers Agents to MsgSwitch
+ * 
  * @author jldupont
  */
 package com.systemical.system;

@@ -24,4 +24,12 @@ public interface IAgent {
 	 */
 	public boolean dispatch(Message msg);
 	
+	
+	/**
+	 * An Agent returns its "name"
+	 * 
+	 * @return
+	 */
+	public String getName();
+	
 }//

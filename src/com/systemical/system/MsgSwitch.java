@@ -44,7 +44,7 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 				try {
 					doSend(msg);
 				} catch(SendException se) {
-					Log.e("MsgSwitch", se.target.getName()+":msg("+im.translate(se.msg.what)+"), exception: "+se.e.toString());
+					Log.e("MsgSwitch", se.target.getAgentName()+":msg("+im.translate(se.msg.what)+"), exception: "+se.e.toString());
 				}
 			}
 			

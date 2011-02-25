@@ -13,7 +13,7 @@ public interface IAgent {
 	 * 
 	 * @param ms
 	 */
-	public void registerMsgSwitch(MsgSwitch ms);
+	public void registerMsgSwitch(IMsgSwitch ms);
 	
 	/**
 	 * Used by the MsgSwitch to retrieve the 'handler'
@@ -39,6 +39,6 @@ public interface IAgent {
 	 * 
 	 * @return
 	 */
-	public String getName();
+	public String getAgentName();
 	
 }//

@@ -15,4 +15,7 @@ public class MsgTypesList {
 		}
 	}//
 	
+	public boolean contains(int type) {
+		return mtl.contains(type);
+	}
 }//

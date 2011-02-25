@@ -18,4 +18,6 @@
         </activity>
     </application>
    
+   <service android:enabled="true" android:name=".MainService" />
+   
 </manifest>

@@ -8,11 +8,14 @@ package com.systemical.eventtx;
 import java.util.HashMap;
 
 import android.os.Message;
+import android.util.Log;
 
 import com.systemical.system.Debug;
 
 public class Factory {
 
+	final static String TAG="Factory";
+	
 	public enum K {
 		ACTIVITY
 		,MSG_SWITCH
@@ -47,13 +50,16 @@ public class Factory {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void setObject(K klass, Class classe, Object o) {
+		Log.d(TAG, "setObject: start, klass:"+klass.toString());
 		kmap.put(klass, classe);
 		tmap.put(klass, T.SINGLETON);
 		omap.put(classe, o);
+		Log.d(TAG, "setObject: end");
 	}//
 	
 	@SuppressWarnings("unchecked")
 	public static Object get(K klass) {
+		Log.d(TAG, "get: start, klass:"+klass.toString());
 		if (!isInit) 
 			Factory.init();
 		Object res=null;
@@ -69,12 +75,15 @@ public class Factory {
 			Debug.wtf("Issue whilst factoring a '"+klass.toString()+"'");
 			return null;
 		}
+		Log.d(TAG, "get: end");
 		return res;
 	}
 	
 	protected static void init() {
 		isInit=true;
 
+		Log.d(TAG, "init: start");
+		
 		kmap.put(K.MDNS_THREAD,	MDNSThread.class);
 		tmap.put(K.MDNS_THREAD, T.SINGLETON);
 
@@ -90,16 +99,18 @@ public class Factory {
 		kmap.put(K.MSG_MAP, 	MsgMap.class);
 		tmap.put(K.MSG_MAP, 	T.SINGLETON);
 		
+		Log.d(TAG, "init: end");
 	}//
 	
 	@SuppressWarnings("unchecked")
 	protected static Object handleSingleton(Class classe) throws IllegalAccessException, InstantiationException  {
+		Log.d(TAG, "handleSingleton: start, classe:"+classe.toString());
 		Object o=omap.get(classe);
 		if (o==null) {
 			o=classe.newInstance();
 			omap.put(classe, o);
 		}
-		
+		Log.d(TAG, "handleSingleton: end");
 		return o;
 	}//
 	

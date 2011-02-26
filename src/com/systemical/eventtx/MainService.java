@@ -4,28 +4,21 @@ import com.systemical.eventtx.Factory.K;
 import com.systemical.system.IAgent;
 import com.systemical.system.MsgSwitch;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
+import android.util.Log;
 
-public class MainService extends Service {
+public class MainService extends IntentService {
 
-	public IBinder onBind(Intent arg0) {
-		return null;
+	final static String TAG="MainService";
+	
+	public MainService() {
+		super(TAG);
 	}
-
-	public void onCreate() {
-		super.onCreate();
-		Intent intent=new Intent("com.systemical.eventtx.MainService");
-		this.startService(intent);
-	}//
 	
-	public void onDestroy() {
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.d(TAG, "MainService.onStartCommand: start");
 		
-	}//
-	
-	public void onStart(Intent intent, int startid) {
-
 		Factory.setObject(Factory.K.ACTIVITY, MainService.class, this);
         
         MsgSwitch ms=(MsgSwitch) Factory.get(K.MSG_SWITCH);
@@ -39,6 +32,15 @@ public class MainService extends Service {
         
         ms.registerAgent((IAgent) mdns);
         ms.registerAgent((IAgent) debug);
+        
+        Log.d(TAG, "MainService.onStartCommand: end");
+        return START_STICKY;
 	}//
+
+	@Override
+	protected void onHandleIntent(Intent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }///

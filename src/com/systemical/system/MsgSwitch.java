@@ -22,6 +22,8 @@ import android.util.Log;
 
 public class MsgSwitch extends Thread implements IMsgSwitch {
 
+	final static String TAG="MsgSwitch";
+	
 	ArrayList<IAgent> agents=new ArrayList<IAgent>();
 	HashMap<Integer, ArrayList<IAgent>> map=new HashMap<Integer, ArrayList<IAgent>>();
 	

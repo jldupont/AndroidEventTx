@@ -13,6 +13,8 @@ package com.systemical.system;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.systemical.eventtx.Factory;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -25,7 +27,12 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 	
 	IMsgMap im=null;
 	
-	Handler handler=null;
+	public Handler handler=null;
+	
+	protected MsgSwitch() {
+		super();
+		im=(IMsgMap) Factory.get(Factory.K.MSG_MAP);
+	}
 	
 	public void run() {
 		
@@ -54,13 +61,6 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 		
 	}//run
 
-	/**
-	 * 
-	 */
-	public void registerMessageMap(IMsgMap mm) {
-		im=mm;
-	}
-	
 	/**
 	 * IMsgSwitch interface
 	 */

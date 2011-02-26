@@ -9,13 +9,6 @@ import android.os.Message;
 public interface IAgent {
 
 	/**
-	 * Used to register the MsgSwitch with the Agent
-	 * 
-	 * @param ms
-	 */
-	public void registerMsgSwitch(IMsgSwitch ms);
-	
-	/**
 	 * Used by the MsgSwitch to retrieve the 'handler'
 	 *  for an Agent
 	 *  

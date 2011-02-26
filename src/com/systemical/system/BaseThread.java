@@ -1,18 +1,40 @@
+/**
+ * BaseThread class
+ * 
+ * @author jldupont
+ */
 package com.systemical.system;
 
+import com.systemical.eventtx.Factory;
+
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 
 public abstract class BaseThread extends Thread implements IAgent {
 
-	IMsgSwitch ms=null;
+	MsgSwitch ms=null;
 	Handler h=new Handler();
 	protected MsgTypesList mtInterests=null;
+	Activity activity=null;
 	
 	public BaseThread() {
-		super("net");
+		super();
+		
+		ms=(MsgSwitch) Factory.get(Factory.K.MSG_SWITCH);
+		activity=(Activity) Factory.get(Factory.K.ACTIVITY);
 	}
 
+	/**
+	 * Convenience method
+	 * 
+	 * @param msg
+	 */
+	protected void send(int what, Object obj) {
+		Message m=Message.obtain(ms.handler, what, obj);
+		h.sendMessage(m);
+	}
+	
 	/**
 	 * Dispatch
 	 * 
@@ -32,10 +54,6 @@ public abstract class BaseThread extends Thread implements IAgent {
 		return h;
 	}
 
-	public void registerMsgSwitch(IMsgSwitch ms) {
-		this.ms=ms;
-	}
-	
 	/**
 	 * Implemented by derived classes 
 	 * Real dispatch point

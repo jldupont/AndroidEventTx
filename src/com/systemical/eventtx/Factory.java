@@ -7,13 +7,19 @@ package com.systemical.eventtx;
 
 import java.util.HashMap;
 
+import android.os.Message;
+
 import com.systemical.system.Debug;
 
 public class Factory {
 
 	public enum K {
-		MSG_MAP
-		,
+		ACTIVITY
+		,MSG_SWITCH
+		,MSG_MAP
+		,MESSAGE
+		,MDNS_THREAD
+		,DEBUG_THREAD
 	};
 	
 	public enum T {
@@ -31,6 +37,20 @@ public class Factory {
 	// for storing singletons
 	@SuppressWarnings("unchecked")
 	static HashMap<Class, Object> omap=new HashMap<Class, Object>();
+	
+	/**
+	 * Sets an object relative to a class
+	 * Useful with, e.g, Activity
+	 * 
+	 * @param klass
+	 * @param o
+	 */
+	@SuppressWarnings("unchecked")
+	public static void setObject(K klass, Class classe, Object o) {
+		kmap.put(klass, classe);
+		tmap.put(klass, T.SINGLETON);
+		omap.put(classe, o);
+	}//
 	
 	@SuppressWarnings("unchecked")
 	public static Object get(K klass) {
@@ -54,9 +74,21 @@ public class Factory {
 	
 	protected static void init() {
 		isInit=true;
+
+		kmap.put(K.MDNS_THREAD,	MDNSThread.class);
+		tmap.put(K.MDNS_THREAD, T.SINGLETON);
+
+		kmap.put(K.DEBUG_THREAD,	DebugThread.class);
+		tmap.put(K.DEBUG_THREAD, 	T.SINGLETON);
 		
-		kmap.put(K.MSG_MAP, MsgMap.class);
-		tmap.put(K.MSG_MAP, T.SINGLETON);
+		kmap.put(K.MSG_SWITCH,	MsgMap.class);
+		tmap.put(K.MESSAGE, 	T.SINGLETON);
+		
+		kmap.put(K.MESSAGE, 	Message.class);
+		tmap.put(K.MESSAGE, 	T.NORMAL);
+		
+		kmap.put(K.MSG_MAP, 	MsgMap.class);
+		tmap.put(K.MSG_MAP, 	T.SINGLETON);
 		
 	}//
 	

@@ -21,10 +21,4 @@ public interface IMsgSwitch {
 	 */
 	public void send(Message msg);
 	
-	/**
-	 * Registers a message map i.e. {integer -> string}
-	 */
-	public void registerMessageMap(IMsgMap mm);
-	
-	
 }//

@@ -19,7 +19,7 @@ public class MainService extends IntentService {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG, "MainService.onStartCommand: start");
 		
-		Factory.setObject(Factory.K.ACTIVITY, MainService.class, this);
+		Factory.setObject(Factory.K.SERVICE, MainService.class, this);
         
         MsgSwitch ms=(MsgSwitch) Factory.get(K.MSG_SWITCH);
         ms.start();

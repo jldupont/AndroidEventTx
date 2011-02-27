@@ -7,7 +7,6 @@ package com.systemical.system;
 
 import com.systemical.eventtx.Factory;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 
@@ -16,13 +15,11 @@ public abstract class BaseThread extends Thread implements IAgent {
 	MsgSwitch ms=null;
 	Handler h=new Handler();
 	protected MsgTypesList mtInterests=null;
-	Activity activity=null;
 	
 	public BaseThread() {
 		super();
 		
 		ms=(MsgSwitch) Factory.get(Factory.K.MSG_SWITCH);
-		activity=(Activity) Factory.get(Factory.K.ACTIVITY);
 	}
 
 	/**

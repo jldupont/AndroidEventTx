@@ -22,10 +22,6 @@ public class Debug {
 		Log.w(AppName, msg);
 	}
 	
-	public static void wtf(String msg) {
-		Log.wtf(AppName, msg);
-	}
-
 	public static void v(String msg) {
 		Log.v(AppName, msg);
 	}

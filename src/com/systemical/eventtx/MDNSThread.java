@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import android.app.Activity;
+import android.app.Service;
 import android.net.wifi.WifiManager.MulticastLock;
 import android.os.Message;
 import android.util.Log;
@@ -40,13 +40,13 @@ public class MDNSThread extends BaseThread {
     private MulticastSocket multicastSocket;
     private NetUtil netUtil;
 	
-    Activity activity=null;
+    Service service=null;
 
 	public MDNSThread() {
 		super();
-		activity=(Activity) Factory.get(Factory.K.ACTIVITY);
+		service=(Service) Factory.get(Factory.K.SERVICE);
 		
-		netUtil = new NetUtil(activity);
+		netUtil = new NetUtil(service);
 		
 		mtInterests=new MsgTypesList(
 			MsgMap.T.TICK.ordinal()

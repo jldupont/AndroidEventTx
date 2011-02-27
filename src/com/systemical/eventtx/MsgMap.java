@@ -15,12 +15,13 @@ public class MsgMap implements IMsgMap {
 		,DNS_PARSE_ERROR
 	};
 	
-	protected MsgMap() {
+	public MsgMap() {
 	}
 
 	
 	public String translate(int type) {
-		return null;
+		T res=T.values()[type];
+		return res.name();
 	}
 	
 }//

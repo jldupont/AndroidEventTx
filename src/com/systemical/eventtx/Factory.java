@@ -11,13 +11,14 @@ import android.os.Message;
 import android.util.Log;
 
 import com.systemical.system.Debug;
+import com.systemical.system.MsgSwitch;
 
 public class Factory {
 
 	final static String TAG="Factory";
 	
 	public enum K {
-		ACTIVITY
+		SERVICE
 		,MSG_SWITCH
 		,MSG_MAP
 		,MESSAGE
@@ -72,7 +73,7 @@ public class Factory {
 				res=kmap.get(klass).newInstance();
 			}
 		} catch(Exception e) {
-			Debug.wtf("Issue whilst factoring a '"+klass.toString()+"'");
+			Debug.e("Issue whilst factoring a '"+klass.toString()+"' with exception:"+e.toString());
 			return null;
 		}
 		Log.d(TAG, "get: end");
@@ -90,8 +91,8 @@ public class Factory {
 		kmap.put(K.DEBUG_THREAD,	DebugThread.class);
 		tmap.put(K.DEBUG_THREAD, 	T.SINGLETON);
 		
-		kmap.put(K.MSG_SWITCH,	MsgMap.class);
-		tmap.put(K.MESSAGE, 	T.SINGLETON);
+		kmap.put(K.MSG_SWITCH,	MsgSwitch.class);
+		tmap.put(K.MSG_SWITCH, 	T.SINGLETON);
 		
 		kmap.put(K.MESSAGE, 	Message.class);
 		tmap.put(K.MESSAGE, 	T.NORMAL);
@@ -107,6 +108,7 @@ public class Factory {
 		Log.d(TAG, "handleSingleton: start, classe:"+classe.toString());
 		Object o=omap.get(classe);
 		if (o==null) {
+			Log.d(TAG, ">> Creating new instance of:"+classe.toString());
 			o=classe.newInstance();
 			omap.put(classe, o);
 		}

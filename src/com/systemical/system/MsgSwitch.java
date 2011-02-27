@@ -31,7 +31,7 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 	
 	public Handler handler=null;
 	
-	protected MsgSwitch() {
+	public MsgSwitch() {
 		super();
 		im=(IMsgMap) Factory.get(Factory.K.MSG_MAP);
 	}
@@ -86,13 +86,14 @@ public class MsgSwitch extends Thread implements IMsgSwitch {
 		
 		// first time around? Send to all
 		if (interested==null) {
+			ArrayList<IAgent> startList=new ArrayList<IAgent>();
+			
 			for (IAgent agent : agents) {
 				try {
 					boolean interest=agent.dispatch(msg);
 
 					// did the recipient show an interest in the message?
 					if (interest) {
-						ArrayList<IAgent> startList=new ArrayList<IAgent>();
 						startList.add(agent);
 						map.put(msg.what, startList);
 					}
